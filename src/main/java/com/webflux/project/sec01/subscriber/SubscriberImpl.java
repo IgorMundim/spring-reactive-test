@@ -10,7 +10,7 @@ public class SubscriberImpl implements Subscriber<String>{
     private static final Logger log = LoggerFactory.getLogger(SubscriberImpl.class);
     private Subscription subscription;
 
-    public Subscription geSubscription() {
+    public Subscription getSubscription() {
         return subscription;
     }
 
