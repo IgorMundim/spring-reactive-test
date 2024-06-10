@@ -3,19 +3,54 @@ package com.webflux.project.sec01;
 import com.webflux.project.sec01.publisher.PublisherImpl;
 import com.webflux.project.sec01.subscriber.SubscriberImpl;
 
+import java.time.Duration;
+
 public class Demo {
     public static void main(String[] args) throws Exception{
-     demo2();
+     demo4();
     }
      private static void demo1(){
          var publisher = new PublisherImpl();
          var subscriber = new SubscriberImpl();
          publisher.subscribe(subscriber);
      }
-     private static void demo2(){
+     private static void demo2() throws InterruptedException {
          var publisher = new PublisherImpl();
          var subscriber = new SubscriberImpl();
          publisher.subscribe(subscriber);
          subscriber.geSubscription().request(3);
+         Thread.sleep(Duration.ofSeconds(2));
+         subscriber.geSubscription().request(3);
+         Thread.sleep(Duration.ofSeconds(2));
+         subscriber.geSubscription().request(3);
+         Thread.sleep(Duration.ofSeconds(2));
+         subscriber.geSubscription().request(3);
      }
+
+    private static void demo3() throws InterruptedException {
+        var publisher = new PublisherImpl();
+        var subscriber = new SubscriberImpl();
+        publisher.subscribe(subscriber);
+        subscriber.geSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.geSubscription().request(3);
+        subscriber.geSubscription().cancel();
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.geSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.geSubscription().request(3);
+    }
+
+    private static void demo4() throws InterruptedException {
+        var publisher = new PublisherImpl();
+        var subscriber = new SubscriberImpl();
+        publisher.subscribe(subscriber);
+        subscriber.geSubscription().request(2);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.geSubscription().request(11);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.geSubscription().request(3);
+        Thread.sleep(Duration.ofSeconds(2));
+        subscriber.geSubscription().request(3);
+    }
 }
